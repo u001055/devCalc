@@ -1,9 +1,25 @@
+'use strict';
+
+const DATA = {
+    wichSite: ['landing', 'multiPage', 'onlineStore'],
+    price: [4000, 8000, 26000],
+    desktopTemplates: [50, 40, 30],
+    adapt: 20,
+    mobileTemplates: 15,
+    editable: 10,
+    metrikaYandex: [500, 1000, 2000],
+    analyticsGoogle: [850, 1350, 3000],
+    sendOrder: 500,
+    deadlineDay: [[2, 7], [3, 10], [7, 14]],
+    deadlinePercent: [20, 17, 15]
+};
+
 const startButton = document.querySelector('.start-button'),
 firstScreen = document.querySelector('.first-screen'),
 mainForm = document.querySelector('.main-form'),
 formCalculate = document.querySelector('.form-calculate'),
-endButton = document.querySelector('.end-button')
-total = document.querySelector('.total')
+endButton = document.querySelector('.end-button'),
+total = document.querySelector('.total'),
 fastRange = document.querySelector('.fast-range');
 
 function showElem(elem) {
