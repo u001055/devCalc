@@ -56,15 +56,18 @@ function priceCalculation(elem) {
             index = DATA.whichSite.indexOf(item.value);
 
         } else if (item.classList.contains('calc-handler') && item.checked) {
-            options.push(item.value);            
+            options.push(item.value);
         }
         if (item.value === 'adapt') {
+            if (!item.checked) {
+                mobile.checked = false;
+            }
             mobile.disabled = !item.checked;
         };
     }
-    options.forEach(function(key) {
+    options.forEach(function (key) {
 
-        if (typeof(DATA[key]) === 'number') {
+        if (typeof (DATA[key]) === 'number') {
             if (key === 'sendOrder') {
                 result += DATA[key];
             } else {
