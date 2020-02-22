@@ -43,7 +43,10 @@ const startButton = document.querySelector('.start-button'),
     calcDescription = document.querySelector('.calc-description'),
     metrikaYandex = document.getElementById('metrikaYandex'),
     analyticsGoogle = document.getElementById('analyticsGoogle'),
-    sendOrder = document.getElementById('sendOrder');
+    sendOrder = document.getElementById('sendOrder'),
+    cardHead = document.querySelector('.card-head'),
+    totalPrice = document.querySelector('.total_price'),
+    firstFieldSet = document.querySelector('.first-fieldset');
 
 
 function declOfNum(n, titles) {
@@ -199,9 +202,28 @@ function handlerCallBackForm(event) {
 
 };
 
+function moveBackTotal() {
+    if (document.documentElement.getBoundingClientRect().bottom > document.documentElement.clientHeight + 200) {
+        totalPrice.classList.remove('totalPriceBottom');
+        firstFieldSet.after(totalPrice);
+        window.removeEventListener('scroll', moveBackTotal);
+        window.addEventListener('scroll', moveTotal)
+    }
+}
+
+function moveTotal() {
+    if (document.documentElement.getBoundingClientRect().bottom < document.documentElement.clientHeight + 200) {
+        totalPrice.classList.add('totalPriceBottom');
+        endButton.before(totalPrice);
+        window.removeEventListener('scroll', moveTotal);
+        window.addEventListener('scroll', moveBackTotal)
+    }
+}
+
 startButton.addEventListener('click', function () {
     showElem(mainForm);
     hideElem(firstScreen);
+    window.addEventListener('scroll', moveTotal)
 });
 
 endButton.addEventListener('click', function () {
@@ -211,6 +233,9 @@ endButton.addEventListener('click', function () {
         }
     }
 
+    cardHead.textContent = 'Заявка на разработку сайта';
+
+    hideElem(totalPrice);
     showElem(total);
 });
 
