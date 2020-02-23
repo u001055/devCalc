@@ -142,7 +142,7 @@ function priceCalculation(elem = {}) {
     for (const item of formCalculate.elements) {
         if (item.name === 'whichSite' && item.checked) {
             index = DATA.whichSite.indexOf(item.value);
-            site = item.dataset.site;            
+            site = item.dataset.site;
             maxDeadlineDay = DATA.deadlineDay[index][1];
             minDeadlineDay = DATA.deadlineDay[index][0];
         } else if (item.classList.contains('calc-handler') && item.checked) {
@@ -170,11 +170,6 @@ function priceCalculation(elem = {}) {
         }
     });
 
-
-
-    //const overDay = maxDeadlineDay - rangeDeadline.value;
-    //console.log('2:', rangeDeadline.value);
-
     result += result * overPercent;
 
     renderTextContent(result, site, maxDeadlineDay, minDeadlineDay);
@@ -193,6 +188,7 @@ function handlerCallBackForm(event) {
 
     if (target.classList.contains('want-faster')) {
         target.checked ? showElem(fastRange) : hideElem(fastRange);
+        rangeDeadline.value = rangeDeadline.max;
         priceCalculation(target);
     }
 
