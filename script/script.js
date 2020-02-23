@@ -49,21 +49,14 @@ const startButton = document.querySelector('.start-button'),
     firstFieldSet = document.querySelector('.first-fieldset');
 
 
-function declOfNum(n, titles) {
-    return n + ' ' + titles[n % 10 === 1 && n % 100 !== 11 ?
+const declOfNum = (n, titles) => n + ' ' + titles[n % 10 === 1 && n % 100 !== 11 ?
         0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
-}
 
+const showElem = elem => elem.style.display = 'block';
 
-function showElem(elem) {
-    elem.style.display = 'block';
-}
+const hideElem = elem => elem.style.display = 'none';
 
-function hideElem(elem) {
-    elem.style.display = 'none';
-}
-
-function dopOptionsString() {
+const dopOptionsString = () => {
     let str = '';
 
     if (metrikaYandex.checked || analyticsGoogle.checked || sendOrder.checked) {
@@ -93,9 +86,9 @@ function dopOptionsString() {
     }
 
     return str;
-}
+};
 
-function renderTextContent(total, site, maxDay, minDay) {
+const renderTextContent = (total, site, maxDay, minDay) => {
 
     totalPriceSum.textContent = total;
     typeSite.textContent = site;
@@ -119,7 +112,7 @@ function renderTextContent(total, site, maxDay, minDay) {
 }
 
 
-function priceCalculation(elem = {}) {
+const priceCalculation = (elem = {}) => {
     let result = 0,
         index = 0,
         options = [],
@@ -173,9 +166,9 @@ function priceCalculation(elem = {}) {
     result += result * overPercent;
 
     renderTextContent(result, site, maxDeadlineDay, minDeadlineDay);
-}
+};
 
-function handlerCallBackForm(event) {
+const handlerCallBackForm = event => {
     const target = event.target;
 
     if (adapt.checked) {
@@ -198,31 +191,31 @@ function handlerCallBackForm(event) {
 
 };
 
-function moveBackTotal() {
+const moveBackTotal = () => {
     if (document.documentElement.getBoundingClientRect().bottom > document.documentElement.clientHeight + 200) {
         totalPrice.classList.remove('totalPriceBottom');
         firstFieldSet.after(totalPrice);
         window.removeEventListener('scroll', moveBackTotal);
         window.addEventListener('scroll', moveTotal)
     }
-}
+};
 
-function moveTotal() {
+const moveTotal = () => {
     if (document.documentElement.getBoundingClientRect().bottom < document.documentElement.clientHeight + 200) {
         totalPrice.classList.add('totalPriceBottom');
         endButton.before(totalPrice);
         window.removeEventListener('scroll', moveTotal);
         window.addEventListener('scroll', moveBackTotal)
     }
-}
+};
 
-startButton.addEventListener('click', function () {
+startButton.addEventListener('click', () => {
     showElem(mainForm);
     hideElem(firstScreen);
     window.addEventListener('scroll', moveTotal)
 });
 
-endButton.addEventListener('click', function () {
+endButton.addEventListener('click', () => {
     for (const elem of formCalculate.elements) {
         if (elem.tagName === 'FIELDSET') {
             hideElem(elem);
